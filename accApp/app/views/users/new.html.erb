@@ -1,0 +1,32 @@
+<h1>Skapa ny användare</h1>
+
+<%= form_for @user do |u| %>
+  <div>
+    <%= u.label :first_name %>
+    <%= u.text_field :first_name %>
+  </div>
+
+  <div>
+    <%= u.label :last_name %>
+    <%= u.text_field :last_name %>
+  </div>
+
+  <div>
+    <%= u.label :email %>
+    <%= u.text_field :email %>
+  </div>
+
+  <div>
+    <%= u.label :app_name %>
+    <%= u.text_field :app_name %>
+  </div>
+
+  <div>
+    <%= u.label :api_key %>
+    <%= u.text_field :api_key %>
+  </div>
+
+  <div>
+    <%= u.submit "Skapa användare" %>
+  </div>
+<% end %>

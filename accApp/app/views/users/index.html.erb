@@ -1,0 +1,13 @@
+<h1>Alla användare</h1>
+
+<% for user in @users %>
+<hr>
+<h3><%= user.first_name %> <%= user.last_name %></h3>
+<p>
+  Application: <%= user.app_name %><br />
+  Api-key: <%= user.api_key %><br />
+  Email: <%= user.email %><br />
+  <%= link_to "Go to user-description", user_path(user) %>
+</p>
+<% end %>
+<hr>
