@@ -1,29 +1,36 @@
 <h1>Skapa ny användare</h1>
-
+<%=SecureRandom.hex(10)%>
 <%= form_for @user do |u| %>
-  <div>
+  <div class="form_field_div">
     <%= u.label :first_name %>
     <%= u.text_field :first_name %>
+    <% if @user.errors[:first_name].any? %>
+      <small class="error"><%= @user.errors[:first_name].first %></small>
+    <% end %>
   </div>
 
-  <div>
+  <div class="form_field_div">
     <%= u.label :last_name %>
     <%= u.text_field :last_name %>
+    <% if @user.errors[:last_name].any? %>
+      <small class="error"><%= @user.errors[:last_name].first %></small>
+    <% end %>
   </div>
 
-  <div>
+  <div class="form_field_div">
     <%= u.label :email %>
     <%= u.text_field :email %>
+    <% if @user.errors[:email].any? %>
+      <small class="error"><%= @user.errors[:email].first %></small>
+    <% end %>
   </div>
 
-  <div>
+  <div class="form_field_div">
     <%= u.label :app_name %>
     <%= u.text_field :app_name %>
-  </div>
-
-  <div>
-    <%= u.label :api_key %>
-    <%= u.text_field :api_key %>
+    <% if @user.errors[:app_name].any? %>
+      <small class="error"><%= @user.errors[:app_name].first %></small>
+    <% end %>
   </div>
 
   <div>

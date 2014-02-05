@@ -25,6 +25,6 @@ class UsersController < ApplicationController
   private
 
   def user_params
-    params.require(:user).permit(:first_name, :last_name, :email, :app_name, :api_key)
+    params.require(:user).permit(:first_name, :last_name, :email, :app_name).merge(:api_key => SecureRandom.hex(11))
   end
 end

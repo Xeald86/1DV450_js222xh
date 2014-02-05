@@ -14,6 +14,6 @@ class User < ActiveRecord::Base
   
   validates :app_name,
   :presence => { :message => "Du måste ange ett namn på din applikation!" },
-  :length => { :minimum => 3, :message => "Namnet på din applikation mpåste bestå av minst 3 tecken!" }
+  :length => { :minimum => 3, :message => "Namnet på din applikation måste bestå av minst 3 tecken!" }
   
 end

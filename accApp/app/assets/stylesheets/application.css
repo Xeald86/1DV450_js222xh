@@ -11,3 +11,19 @@
  *= require_self
  *= require_tree .
  */
+
+label {
+  display: block;
+}
+
+.error {
+  color: #f00;
+}
+
+.form_field_div {
+  margin-bottom: 20px;
+}
+
+.field_with_errors input {
+  border: 1px solid #f00;
+}
