@@ -1,0 +1,32 @@
+<div id="Header">
+  <span class="title">Sign in</span>
+</div>
+
+<div class="center_container">
+  <% if flash[:error] %>
+    <div class="errorMsg">
+      <%=flash[:error]%>
+    </div>
+  <% end %>
+  <% if flash[:message] %>
+    <div class="successMsg">
+      <%=flash[:message]%>
+    </div>
+  <% end %>
+  
+  <%=form_tag(login_path, method: "post") do %>
+  
+  <div class="form_field_div">
+    <%= label_tag(:email, "Email") %>
+    <%= email_field_tag(:email) %>
+  </div>
+  
+  <div class="form_field_div">
+    <%= label_tag(:password, "Password") %>
+    <%= password_field_tag(:password) %>
+  </div>
+  
+  <div><%= submit_tag("Sign in") %></div>
+  Register a new application <%=link_to "here!", register_path %>
+  <% end %>
+</div>

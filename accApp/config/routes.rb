@@ -3,7 +3,7 @@ AccApp::Application.routes.draw do
   # See how all your routes lay out with "rake routes".
 
   # You can have the root of your site routed with "root"
-  # root 'welcome#index'
+  root 'applications#index'
 
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
@@ -12,7 +12,36 @@ AccApp::Application.routes.draw do
   #   get 'products/:id/purchase' => 'catalog#purchase', as: :purchase
 
   # Example resource route (maps HTTP verbs to controller actions automatically):
-  resources :users
+  resources :applications
+  
+  get 'apikeys' => 'apikeys#show', as: :apikey
+  
+  post 'login' => 'applications#login', as: :login
+  get 'logout' => 'applications#logout', as: :logout
+  get 'register' => 'applications#new', as: :register
+  
+  resources :users do
+    resources :resources
+  end
+  
+  resources :resource_types do
+    resources :resources
+  end
+  
+  resources :licences do
+    resources :resources
+  end
+  
+  resources :tags do
+    resources :resources
+  end
+  
+  resources :resources do
+    resources :tags
+    resource :user
+    resource :licence
+    resource :resource_type
+  end
 
   # Example resource route with options:
   #   resources :products do

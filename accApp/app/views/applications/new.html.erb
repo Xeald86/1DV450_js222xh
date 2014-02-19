@@ -1,0 +1,35 @@
+<div id="Header">
+  <span class="title">Register for API-key</span>
+</div>
+
+<div class="center_container">
+<%= form_for @app do |a| %>
+  <div class="form_field_div">
+    <%= a.label :email %>
+    <%= a.text_field :email %>
+    <% if @app.errors[:email].any? %>
+      <small class="error"><%= @app.errors[:email].first %></small>
+    <% end %>
+  </div>
+
+  <div class="form_field_div">
+    <%= a.label :password %>
+    <%= a.password_field :password %>
+    <% if @app.errors[:password].any? %>
+      <small class="error"><%= @app.errors[:password].first %></small>
+    <% end %>
+  </div>
+
+  <div class="form_field_div">
+    <%= a.label :password_confirmation %>
+    <%= a.password_field :password_confirmation %>
+    <% if @app.errors[:password_confirmation].any? %>
+      <small class="error"><%= @app.errors[:password_confirmation].first %></small>
+    <% end %>
+  </div>
+
+  <div>
+    <%= a.submit "Register" %>
+  </div>
+<% end %>
+</div>

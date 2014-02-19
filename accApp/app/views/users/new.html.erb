@@ -1,5 +1,8 @@
-<h1>Skapa ny användare</h1>
-<%=SecureRandom.hex(10)%>
+<div id="Header">
+  <span class="title">Skapa ny användare</span>
+</div>
+
+<div class="center_container">
 <%= form_for @user do |u| %>
   <div class="form_field_div">
     <%= u.label :first_name %>
@@ -26,10 +29,18 @@
   </div>
 
   <div class="form_field_div">
-    <%= u.label :app_name %>
-    <%= u.text_field :app_name %>
-    <% if @user.errors[:app_name].any? %>
-      <small class="error"><%= @user.errors[:app_name].first %></small>
+    <%= u.label :password %>
+    <%= u.password_field :password %>
+    <% if @user.errors[:password].any? %>
+      <small class="error"><%= @user.errors[:password].first %></small>
+    <% end %>
+  </div>
+
+  <div class="form_field_div">
+    <%= u.label :password_confirmation %>
+    <%= u.password_field :password_confirmation %>
+    <% if @user.errors[:password_confirmation].any? %>
+      <small class="error"><%= @user.errors[:password_confirmation].first %></small>
     <% end %>
   </div>
 
@@ -37,3 +48,4 @@
     <%= u.submit "Skapa användare" %>
   </div>
 <% end %>
+</div>
