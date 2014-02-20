@@ -6,9 +6,24 @@ class Resource < ActiveRecord::Base
   belongs_to :user
   has_and_belongs_to_many :tags
   
+  validates :name,
+  :presence => { :message => "A name for the resource is required" },
+  :length => { :minimum => 5, :message => "Your resource-name needs to be at least 5 chars long" }
+  
+  validates :description,
+  :presence => { :message => "A short description for the resource is required" },
+  :length => { :minimum => 10, :message => "Your description needs to be at least 10 chars long" }
+  
+  validates :url,
+  :presence => { :message => "A url for the resource is required" },
+  :length => { :minimum => 10, :message => "Your url needs to be at least 10 chars long" }
+  
+  validates :user_id,
+  :presence => { :message => "No user can be found as the creator of this resource" }
+  
   def as_json(options={})
     super(options.merge(
-      :except => [:created_at, :updated_at],
+      :except => [:updated_at, :licence_id, :tag_id, :user_id, :resource_type_id],
         #:include => [:tags, :resource_type, :licence, :user],
         :include => [],
         :methods => [:links]
@@ -17,7 +32,7 @@ class Resource < ActiveRecord::Base
   
   def to_xml(options={})
     super(options.merge(
-        :except => [:created_at, :updated_at],
+      :except => [:updated_at, :licence_id, :tag_id, :user_id, :resource_type_id],
         #:include => [:tags, :resource_type, :licence, :user],
         :include => [],
         :methods => [:links]

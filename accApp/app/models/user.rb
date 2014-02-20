@@ -6,23 +6,21 @@ class User < ActiveRecord::Base
   has_secure_password
   
   validates :first_name,
-  :presence => { :message => "Du måste ange ett namn!" },
-  :length => { :minimum => 2, :message => "Ditt namn måste bestå av minst 2 tecken!" }
+  :presence => { :message => "Firstname is required" },
+  :length => { :minimum => 2, :message => "Your firstname is to short" }
   
   validates :last_name,
-  :presence => { :message => "Du måste ange ett efternamn!" },
-  :length => { :minimum => 2, :message => "Ditt efternamn måste bestå av minst 2 tecken!" }
+  :presence => { :message => "Lastname is required" },
+  :length => { :minimum => 2, :message => "Your lastname is to short" }
   
   validates :email,
   :uniqueness => true,
-  :presence => { :message => "Du måste fylla i en epost!" },
-  :length => { :minimum => 8, :message => "Din epost måste bestå av minst 8 tecken!" }
+  :presence => { :message => "Email is required" },
+  :length => { :minimum => 8, :message => "Your email has to be longer then 8 char" }
   
   validates_format_of :email,
   :with => /\A([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})\z/i,
-  :presence => { :message => "Du har inte angivit en giltig epost" }
-
-
+  :presence => { :message => "You have not entered a valid email" }
   
   def as_json(options={})
     super(options.merge(

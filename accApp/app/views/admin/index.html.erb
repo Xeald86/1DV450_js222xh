@@ -1,0 +1,21 @@
+<div id="Header">
+  <span class="title">Administration</span>
+</div>
+
+<div class="center_container">
+  <% if flash[:error] %>
+    <div class="errorMsg">
+      <%=flash[:error]%>
+    </div>
+  <% end %>
+  <% if flash[:message] %>
+    <div class="successMsg">
+      <%=flash[:message]%>
+    </div>
+  <% end %>
+  
+  <h2>Application-users</h2>
+  <% @apps.each do |app| %>
+  <strong><%= app.email%></strong> [key: <%= app.apikey.auth_token %>] [<%= link_to "X", adminDestroy_path(:id => app) %>]<br />
+  <% end %>
+</div>

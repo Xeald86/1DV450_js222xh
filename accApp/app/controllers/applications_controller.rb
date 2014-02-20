@@ -36,6 +36,10 @@ class ApplicationsController < ApplicationController
     end
   end
   
+  def documentation
+    render action: "documentation", layout: nil
+  end
+  
   def logout
     session[:appid] = nil
     flash[:message] = "You have been logged out"

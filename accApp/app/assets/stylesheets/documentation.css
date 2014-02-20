@@ -1,0 +1,42 @@
+html, body {
+  height: 100%;
+  padding: 0;
+  margin: 0;
+  background: #444;
+  font: 13px Verdana;
+}
+
+#Wrapper {
+  width: 1000px;
+  background: #fff;
+  border-left: 1px solid #000;
+  border-right: 1px solid #000;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+#Header {
+  height: 50px;
+  background: #4b82d3;
+  text-align: center;
+  border: 1px solid #000;
+  -webkit-border-radius: 20px;
+  -moz-border-radius: 20px;
+  border-radius: 20px;
+}
+
+.title {
+  margin: 0;
+  padding: 0;
+  font-size: 24px;
+  font-weight: bold;
+  line-height: 50px;
+}
+
+.important {
+ color: #f00; 
+}
+
+p {
+  padding-left: 20px;
+}

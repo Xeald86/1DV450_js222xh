@@ -1,7 +1,7 @@
 class ApplicationController < ActionController::Base
   # Prevent CSRF attacks by raising an exception.
   # For APIs, you may want to use :null_session instead.
-  protect_from_forgery with: :exception
+  #protect_from_forgery with: :exception
   
     
 private
@@ -12,6 +12,22 @@ private
         (request.headers["HTTP_ACCEPT"] != "application/xml" && params[:format] != "xml")
       )
       request.format = "json"
+    end
+  end
+  
+  def limit_param
+    if(params[:limit].nil?)
+      100
+    else
+      params[:limit]
+    end
+  end
+  
+  def offset_param
+    if(params[:offset].nil?)
+      0
+    else
+      params[:offset]
     end
   end
   
@@ -28,7 +44,60 @@ private
     
   def restrict_access
     api_key = Apikey.find_by_auth_token(params[:key])
-    head :unauthorized unless api_key
+    error(403, 403, "Not Authenticated") unless api_key
+    #head :unauthorized unless api_key
+  end
+    
+  def user_authentication_required 
+    user = User.find_by_email(request.headers['x-email'])
+    if user && user.authenticate(request.headers['x-password'])
+    else
+      error(403, 403, "Not Authenticated")
+    end
+  end
+    
+  def user_auth_id
+    user = User.find_by_email(request.headers['x-email'])
+    if user && user.authenticate(request.headers['x-password'])
+      user.id
+    end
+  end
+    
+  def error(status, code, message)
+    respond_to do |format|
+      format.json  {  render :json => {:response_type => "ERROR", :response_code => code, :message => message}, :status => status }
+      format.xml  {  render :xml => {:response_type => "ERROR", :response_code => code, :message => message}, :status => status }
+    end
+  end
+    
+  def created_success(status, code, message, link)
+    respond_to do |format|
+      format.json  {  render :json => {:response_code => code, :message => message, :link => link}, :status => status }
+      format.xml  {  render :xml => {:response_code => code, :message => message, :link => link}, :status => status }
+    end
+  end
+    
+  def validation_error(u)
+    respond_to do |format|
+      format.json { render :json => { :response_code => 422, :message => "Some errors where found that needs to be corrected", :errors => u.errors.messages }, :status => 422 }
+      format.xml { render :xml => { :response_code => 422, :message => "Some errors where found that needs to be corrected", :errors => u.errors.messages }, :status => 422 }
+    end
+  end
+    
+  def not_found
+    error(404, 404, "Unknown Method")
+  end
+    
+  def no_content
+    error(204, 204, "No Content")
+  end
+    
+    def bad_request
+      error(400, 400, "Bad Request")
+  end
+    
+  def server_error
+    error(500, 500, "Internal Server Error")
   end
   
 end

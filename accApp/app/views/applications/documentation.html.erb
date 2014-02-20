@@ -1,0 +1,1012 @@
+<html>
+  <head>
+    <title>API Documentation</title>
+    <link rel="stylesheet" type="text/css" href="/assets/documentation.css">
+  </head>
+  <body>
+    <div id="Wrapper">
+      <div id="Header">
+      <span class="title">API Documentation</span>
+    </div>
+      <h2>Registrating your application</h2>
+      <p>
+        All requests to the API requires a api-key. You can register your application <a href="/register">Here!</a>
+      </p>
+      
+      <h2>Athentication</h2>
+      <p>
+        Authentication is done in two ways.<br />
+        All requests needs to have a key-parameter in there query. Example: /resources?key=#api-key<br />
+        When doing POST/PUT/DELETE, you need to have "x-email" and "x-password" in the header. (email/pass of a user)<br />
+        <br />
+        <span class="important">User-data to use [email: Jacob@test.com, password: jacob123]</span>
+      </p>
+      
+      <h2>Administration</h2>
+      <p>
+        As admin you can remove api-keys. To sign in as admin go <a href="/admin">Here!</a><br />
+        <br />
+        <span class="important">Admin-data to use [username: admin, password: admin]</span>
+      </p>
+      
+      <hr>
+      
+      <h2>Methods</h2>
+      <p>
+        Users<br />
+        [<a href="#getusers">GET All</a>] 
+        [<a href="#getuser">GET Single</a>] <br />
+        <br />
+        Resources<br />
+        [<a href="#getresources">GET All</a>] 
+        [<a href="#getresource">GET Single</a>] 
+        [<a href="#postresource">POST</a>] 
+        [<a href="#putresource">PUT</a>] 
+        [<a href="#deleteresource">DELETE</a>]<br />
+        <br />
+        Tags<br />
+        [<a href="#gettags">GET All</a>] 
+        [<a href="#gettag">GET Single</a>] 
+        [<a href="#posttag">POST</a>] 
+        [<a href="#puttag">PUT</a>] 
+        [<a href="#deletetag">DELETE</a>]<br />
+        <br />
+        Licences<br />
+        [<a href="#getlicences">GET All</a>] 
+        [<a href="#getlicence">GET Single</a>] 
+        [<a href="#postlicence">POST</a>] 
+        [<a href="#putlicence">PUT</a>] 
+        [<a href="#deletelicence">DELETE</a>]<br />
+        <br />
+        Licences<br />
+        [<a href="#getresourcetypes">GET All</a>] 
+        [<a href="#getresourcetype">GET Single</a>] 
+        [<a href="#postresourcetype">POST</a>] 
+        [<a href="#putresourcetype">PUT</a>] 
+        [<a href="#deleteresourcetype">DELETE</a>]<br />
+        <br />
+        <a href="#searching">Searching the API</a>
+      </p>
+
+      
+      
+       <hr>
+      
+      <h2 id="getusers">GET Users</h2>
+      <p>URI: /users</p>
+      
+      <h3>Description</h3>
+      <p>Returns multiple users</p>
+      
+      <h3>Query Parameters</h3>
+      
+      <p>
+        #limit: return this amount of records.<br />
+        #offset: start to return records after this offset.<br />
+        <span class="important">#key: your api-key</span> (required)<br />
+      </p>
+      
+      <h3>Examples</h3>
+      <p>
+        <strong>Example 1:</strong> /users<br />
+        Result: Authentication error<br />
+        <br />
+        <strong>Example 2:</strong> /users?key=#key<br />
+        Result: returns the top 100 results in JSON<br />
+        <br />
+        <strong>Example 3:</strong> /users.xml?key=#key&limit=10<br />
+        Result: returns the first 10 results in xml<br />
+      </p>
+      
+      <h3>Returns</h3>
+      <p>
+        <pre>
+        {
+        "first_name": string,
+        "email": string,
+        "links": {
+            "self": URI,
+            "resources": URI
+          }
+        }
+        </pre>
+      </p>
+      
+      
+      
+      <hr>
+      
+      <h2 id="getuser">GET User</h2>
+      <p>URI: /users/:id</p>
+      
+      <h3>Description</h3>
+      <p>Returns a single user</p>
+      
+      <h3>Query Parameters</h3>
+      
+      <p>
+        <span class="important">#key: your api-key</span> (required)<br />
+      </p>
+      
+      <h3>Examples</h3>
+      <p>
+        <strong>Example 1:</strong> /users/1<br />
+        Result: Authentication error<br />
+        <br />
+        <strong>Example 2:</strong> /users/2?key=#key<br />
+        Result: returns the user with id "2"<br />
+      </p>
+      
+      <h3>Returns</h3>
+      <p>
+        <pre>
+        {
+        "first_name": string,
+        "email": string,
+        "links": {
+            "self": URI,
+            "resources": URI
+          }
+        }
+        </pre>
+      </p>   
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      <hr>
+      
+      <h2 id="getresources">GET Resources</h2>
+      <p>URI: /resources</p>
+      
+      <h3>Description</h3>
+      <p>Returns multiple resources</p>
+      
+      <h3>Query Parameters</h3>
+      
+      <p>
+        #limit: return this amount of records.<br />
+        #offset: start to return records after this offset.<br />
+        <span class="important">#key: your api-key</span> (required)<br />
+      </p>
+      
+      <h3>Examples</h3>
+      <p>
+        <strong>Example 1:</strong> /resources<br />
+        Result: Authentication error<br />
+        <br />
+        <strong>Example 2:</strong> /resources?key=#key<br />
+        Result: returns the top 100 results in JSON<br />
+        <br />
+        <strong>Example 3:</strong> /resources.xml?key=#key&limit=10<br />
+        Result: returns the first 10 results in xml<br />
+      </p>
+      
+      <h3>Returns</h3>
+      <p>
+        "id": int<br />
+              "resource_type_id": null/int<br />
+              "licence_id": null/int<br />
+              "tag_id": null/int<br />
+              "user_id": int<br />
+              "name": string<br />
+              "description": string<br />
+              "url": string<br />
+              "links": {<br />
+              &nbsp;&nbsp;&nbsp;&nbsp;"self": URI<br />
+              &nbsp;&nbsp;&nbsp;&nbsp;"tags": URI<br />
+              &nbsp;&nbsp;&nbsp;&nbsp;"user": URI<br />
+              &nbsp;&nbsp;&nbsp;&nbsp;"licence": URI<br />
+              &nbsp;&nbsp;&nbsp;&nbsp;"resource_type": URI <br />
+              }
+      </p>
+      
+      
+      
+      <hr>
+      
+      <h2 id="getresource">GET Resource</h2>
+      <p>URI: /resources/:id</p>
+      
+      <h3>Description</h3>
+      <p>Returns a single resource</p>
+      
+      <h3>Query Parameters</h3>
+      
+      <p>
+        <span class="important">#key: your api-key</span> (required)<br />
+      </p>
+      
+      <h3>Examples</h3>
+      <p>
+        <strong>Example 1:</strong> /resources/1<br />
+        Result: Authentication error<br />
+        <br />
+        <strong>Example 2:</strong> /resources/2?key=#key<br />
+        Result: returns the resource with id "2"<br />
+      </p>
+      
+      <h3>Returns</h3>
+      <p>
+              "id": int<br />
+              "resource_type_id": null/int<br />
+              "licence_id": null/int<br />
+              "tag_id": null/int<br />
+              "user_id": int<br />
+              "name": string<br />
+              "description": string<br />
+              "url": string<br />
+              "links": {<br />
+              &nbsp;&nbsp;&nbsp;&nbsp;"self": URI<br />
+              &nbsp;&nbsp;&nbsp;&nbsp;"tags": URI<br />
+              &nbsp;&nbsp;&nbsp;&nbsp;"user": URI<br />
+              &nbsp;&nbsp;&nbsp;&nbsp;"licence": URI<br />
+              &nbsp;&nbsp;&nbsp;&nbsp;"resource_type": URI <br />
+              }
+      </p>
+      
+      
+      
+      <hr>
+      
+      <h2 id="postresource">POST Resource</h2>
+      <p>URI: /resources/</p>
+      
+      <h3>Description</h3>
+      <p>Post a new resource</p>
+      
+      <h3>Query Parameters</h3>
+      <p>
+        <span class="important">#key: your api-key</span> (required)<br />
+      </p>
+      
+      <h3>Header Parameters (User-auth)</h3>
+      <p>
+        <span class="important">#x-email: email</span> (required)<br />
+        <span class="important">#x-password: password</span> (required)<br />
+      </p>
+      
+      <h3>Post Parameters</h3>
+      <p>
+        Posts are in this example made in json:<br />
+        Required fields are: name, description, url
+        <pre>        
+        {
+          "name" : string,
+          "description" : string,
+          "url" : string,
+          "licence_id" : int,
+          "resource_type_id" : int,
+          "tags" : [
+            { "tag_id" : int}, 
+            { "tag_id" : int}, 
+            { "tag_id" : int}
+          ]
+        }
+        </pre>
+      </p>
+      
+      <h3>Returns</h3>
+      <p>
+        <pre>
+        {
+            "response_code": 201,
+            "message": "A new resource has been created",
+            "link": URI
+        }
+        </pre>
+      </p>
+  
+  
+      <hr>
+      
+      <h2 id="putresource">PUT Resource</h2>
+      <p>URI: /resources/:id</p>
+      
+      <h3>Description</h3>
+      <p>Update a new resource</p>
+      
+      <h3>Query Parameters</h3>
+      <p>
+        <span class="important">#key: your api-key</span> (required)<br />
+      </p>
+      
+      <h3>Header Parameters (User-auth)</h3>
+      <p>
+        <span class="important">#x-email: email</span> (required)<br />
+        <span class="important">#x-password: password</span> (required)<br />
+      </p>
+      
+      <h3>Post Parameters</h3>
+      <p>
+        Posts are in this example made in json:
+        <pre>        
+        {
+          "name" : string,
+          "description" : string,
+          "url" : string,
+          "licence_id" : int,
+          "resource_type_id" : int,
+          "tags" : [
+            { "tag_id" : int}, 
+            { "tag_id" : int}, 
+            { "tag_id" : int}
+          ]
+        }
+        </pre>
+      </p>
+      
+      <h3>Returns</h3>
+      <p>
+        <pre>
+        {
+            "response_code": 201,
+            "message": "Resource has been updated",
+            "link": URI
+        }
+        </pre>
+      </p>
+    
+    
+      <hr>
+      
+      <h2 id="deleteresource">DELETE Resource</h2>
+      <p>Admin only!</p>      
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+      <hr>
+      
+      <h2 id="gettags">GET Tags</h2>
+      <p>URI: /tags</p>
+      
+      <h3>Description</h3>
+      <p>Returns multiple tags</p>
+      
+      <h3>Query Parameters</h3>
+      
+      <p>
+        #limit: return this amount of records.<br />
+        #offset: start to return records after this offset.<br />
+        <span class="important">#key: your api-key</span> (required)<br />
+      </p>
+      
+      <h3>Examples</h3>
+      <p>
+        <strong>Example 1:</strong> /tags<br />
+        Result: Authentication error<br />
+        <br />
+        <strong>Example 2:</strong> /tags?key=#key<br />
+        Result: returns the top 100 results in JSON<br />
+        <br />
+        <strong>Example 3:</strong> /tags.xml?key=#key&limit=10<br />
+        Result: returns the first 10 results in xml<br />
+      </p>
+      
+      <h3>Returns</h3>
+      <p>
+        JSON:<br />
+        <pre>
+        {
+        "id": int,
+        "tag": string,
+        "links": {
+            "self": URI,
+            "resources": URI
+        }
+        }
+      </pre>
+      </p>
+      
+      
+      
+      <hr>
+      
+      <h2 id="gettag">GET Tag</h2>
+      <p>URI: /tags/:id</p>
+      
+      <h3>Description</h3>
+      <p>Returns a single tag</p>
+      
+      <h3>Query Parameters</h3>
+      
+      <p>
+        <span class="important">#key: your api-key</span> (required)<br />
+      </p>
+      
+      <h3>Examples</h3>
+      <p>
+        <strong>Example 1:</strong> /tags/1<br />
+        Result: Authentication error<br />
+        <br />
+        <strong>Example 2:</strong> /tags/2?key=#key<br />
+        Result: returns the tag with id "2"<br />
+      </p>
+      
+      <h3>Returns</h3>
+      <p>
+        JSON:<br />
+        <pre>
+        {
+        "id": int,
+        "tag": string,
+        "links": {
+            "self": URI,
+            "resources": URI
+        }
+        }
+      </pre>
+      </p>
+      
+      
+      
+      <hr>
+      
+      <h2 id="posttag">POST Tag</h2>
+      <p>URI: /tags/</p>
+      
+      <h3>Description</h3>
+      <p>Post a new tag</p>
+      
+      <h3>Query Parameters</h3>
+      <p>
+        <span class="important">#key: your api-key</span> (required)<br />
+      </p>
+      
+      <h3>Header Parameters (User-auth)</h3>
+      <p>
+        <span class="important">#x-email: email</span> (required)<br />
+        <span class="important">#x-password: password</span> (required)<br />
+      </p>
+      
+      <h3>Post Parameters</h3>
+      <p>
+        Posts are in this example made in json:<br />
+        Required fields are: tagName
+        <pre>        
+        {
+          "tagName" : string
+        }
+        </pre>
+      </p>
+      
+      <h3>Returns</h3>
+      <p>
+        <pre>
+        {
+            "response_code": 201,
+            "message": "A new tag has been created",
+            "link": URI
+        }
+        </pre>
+      </p>
+
+
+      <hr>
+      
+      <h2 id="puttag">PUT Tag</h2>
+      <p>URI: /tags/:id</p>
+      
+      <h3>Description</h3>
+      <p>Update a tag</p>
+      
+      <h3>Query Parameters</h3>
+      <p>
+        <span class="important">#key: your api-key</span> (required)<br />
+      </p>
+      
+      <h3>Header Parameters (User-auth)</h3>
+      <p>
+        <span class="important">#x-email: email</span> (required)<br />
+        <span class="important">#x-password: password</span> (required)<br />
+      </p>
+      
+      <h3>Post Parameters</h3>
+      <p>
+        Posts are in this example made in json:<br />
+        Required fields are: tagName
+        <pre>        
+        {
+          "tagName" : string
+        }
+        </pre>
+      </p>
+      
+      <h3>Returns</h3>
+      <p>
+        <pre>
+        {
+            "response_code": 201,
+            "message": "Tag has been updated",
+            "link": URI
+        }
+        </pre>
+      </p>
+      <hr>
+      
+      <h2 id="deletetag">DELETE Tag</h2>
+      <p>URI: /tags/:id</p>
+      
+      <h3>Description</h3>
+      <p>Delete a tag</p>
+      
+      <h3>Query Parameters</h3>
+      <p>
+        <span class="important">#key: your api-key</span> (required)<br />
+      </p>
+      
+      <h3>Header Parameters (User-auth)</h3>
+      <p>
+        <span class="important">#x-email: email</span> (required)<br />
+        <span class="important">#x-password: password</span> (required)<br />
+      </p>
+
+      <h3>Returns</h3>
+      <p>
+        <pre>
+        {
+            "response_code": 200,
+            "message": "Tag deleted",
+            "link": ""
+        }
+        </pre>
+      </p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+     <hr>
+      
+      <h2 id="getlicences">GET Licences</h2>
+      <p>URI: /licences</p>
+      
+      <h3>Description</h3>
+      <p>Returns multiple licences</p>
+      
+      <h3>Query Parameters</h3>
+      <p>
+        #limit: return this amount of records.<br />
+        #offset: start to return records after this offset.<br />
+        <span class="important">#key: your api-key</span> (required)<br />
+      </p>
+      
+      <h3>Examples</h3>
+      <p>
+        <strong>Example 1:</strong> /licences<br />
+        Result: Authentication error<br />
+        <br />
+        <strong>Example 2:</strong> /licences?key=#key<br />
+        Result: returns the top 100 results in JSON<br />
+        <br />
+        <strong>Example 3:</strong> /licences.xml?key=#key&limit=10<br />
+        Result: returns the first 10 results in xml<br />
+      </p>
+      
+      <h3>Returns</h3>
+      <p>
+        JSON:<br />
+        <pre>
+        {
+        "id": int,
+        "licence_type": string,
+        "links": {
+            "self": URI,
+            "resources": URI
+        }
+        }
+      </pre>
+      </p>
+      
+      
+      
+      <hr>
+      
+      <h2 id="getlicence">GET Licence</h2>
+      <p>URI: /licences/:id</p>
+      
+      <h3>Description</h3>
+      <p>Returns a single licence</p>
+      
+      <h3>Query Parameters</h3>
+      
+      <p>
+        <span class="important">#key: your api-key</span> (required)<br />
+      </p>
+      
+      <h3>Examples</h3>
+      <p>
+        <strong>Example 1:</strong> /licences/1<br />
+        Result: Authentication error<br />
+        <br />
+        <strong>Example 2:</strong> /licences/2?key=#key<br />
+        Result: returns the licence with id "2"<br />
+      </p>
+      
+      <h3>Returns</h3>
+      <p>
+        JSON:<br />
+        <pre>
+        {
+        "id": int,
+        "licence_type": string,
+        "links": {
+            "self": URI,
+            "resources": URI
+        }
+        }
+      </pre>
+      </p>
+      
+      
+      
+      <hr>
+      
+      <h2 id="postlicence">POST Licence</h2>
+      <p>URI: /licences/</p>
+      
+      <h3>Description</h3>
+      <p>Post a new licence</p>
+      
+      <h3>Query Parameters</h3>
+      <p>
+        <span class="important">#key: your api-key</span> (required)<br />
+      </p>
+      
+      <h3>Header Parameters (User-auth)</h3>
+      <p>
+        <span class="important">#x-email: email</span> (required)<br />
+        <span class="important">#x-password: password</span> (required)<br />
+      </p>
+      
+      <h3>Post Parameters</h3>
+      <p>
+        Posts are in this example made in json:<br />
+        Required fields are: licence_type
+        <pre>        
+        {
+          "licence_type" : string
+        }
+        </pre>
+      </p>
+      
+      <h3>Returns</h3>
+      <p>
+        <pre>
+        {
+            "response_code": 201,
+            "message": "A new licence has been created",
+            "link": URI
+        }
+        </pre>
+      </p>
+
+      <hr>
+      
+      <h2 id="putlicence">PUT Licence</h2>
+      <p>URI: /licences/:id</p>
+      
+      <h3>Description</h3>
+      <p>Update a licence</p>
+      
+      <h3>Query Parameters</h3>
+      <p>
+        <span class="important">#key: your api-key</span> (required)<br />
+      </p>
+      
+      <h3>Header Parameters (User-auth)</h3>
+      <p>
+        <span class="important">#x-email: email</span> (required)<br />
+        <span class="important">#x-password: password</span> (required)<br />
+      </p>
+      
+      <h3>Post Parameters</h3>
+      <p>
+        Posts are in this example made in json:<br />
+        Required fields are: licence_type
+        <pre>        
+        {
+          "licence_type" : string
+        }
+        </pre>
+      </p>
+      
+      <h3>Returns</h3>
+      <p>
+        <pre>
+        {
+            "response_code": 201,
+            "message": "Licence has been updated",
+            "link": URI
+        }
+        </pre>
+      </p>
+
+      <hr>
+      
+      <h2 id="deletelicence">DELETE Licence</h2>
+      <p>URI: /licences/:id</p>
+      
+      <h3>Description</h3>
+      <p>Delete a licence</p>
+      
+      <h3>Query Parameters</h3>
+      <p>
+        <span class="important">#key: your api-key</span> (required)<br />
+      </p>
+      
+      <h3>Header Parameters (User-auth)</h3>
+      <p>
+        <span class="important">#x-email: email</span> (required)<br />
+        <span class="important">#x-password: password</span> (required)<br />
+      </p>
+
+      <h3>Returns</h3>
+      <p>
+        <pre>
+        {
+            "response_code": 200,
+            "message": "Licence deleted",
+            "link": ""
+        }
+        </pre>
+      </p>
+
+
+
+
+
+
+
+
+
+
+
+
+    <hr>
+      
+      <h2 id="getresourcetypes">GET Resource-types</h2>
+      <p>URI: /resource_types</p>
+      
+      <h3>Description</h3>
+      <p>Returns multiple resource-types</p>
+      
+      <h3>Query Parameters</h3>
+      <p>
+        #limit: return this amount of records.<br />
+        #offset: start to return records after this offset.<br />
+        <span class="important">#key: your api-key</span> (required)<br />
+      </p>
+      
+      <h3>Examples</h3>
+      <p>
+        <strong>Example 1:</strong> /resource_types<br />
+        Result: Authentication error<br />
+        <br />
+        <strong>Example 2:</strong> /resource_types?key=#key<br />
+        Result: returns the top 100 results in JSON<br />
+        <br />
+        <strong>Example 3:</strong> /resource_types.xml?key=#key&limit=10<br />
+        Result: returns the first 10 results in xml<br />
+      </p>
+      
+      <h3>Returns</h3>
+      <p>
+        JSON:<br />
+        <pre>
+        {
+            "id": int,
+            "typeName": string
+        }
+      </pre>
+      </p>
+      
+      
+      <hr>
+      
+      <h2 id="getresourcetype">GET Resource-type</h2>
+      <p>URI: /resource_types/:id</p>
+      
+      <h3>Description</h3>
+      <p>Returns a single resource-type</p>
+      
+      <h3>Query Parameters</h3>
+      
+      <p>
+        <span class="important">#key: your api-key</span> (required)<br />
+      </p>
+      
+      <h3>Examples</h3>
+      <p>
+        <strong>Example 1:</strong> /resource_types/1<br />
+        Result: Authentication error<br />
+        <br />
+        <strong>Example 2:</strong> /resource_types/2?key=#key<br />
+        Result: returns the resource-type with id "2"<br />
+      </p>
+      
+      <h3>Returns</h3>
+      <p>
+        JSON:<br />
+        <pre>
+        {
+            "id": int,
+            "typeName": string
+        }
+      </pre>
+      </p>
+      
+      
+      
+      <hr>
+      
+      <h2 id="postresourcetype">POST Resource-type</h2>
+      <p>URI: /resource_types/</p>
+      
+      <h3>Description</h3>
+      <p>Post a new resource-type</p>
+      
+      <h3>Query Parameters</h3>
+      <p>
+        <span class="important">#key: your api-key</span> (required)<br />
+      </p>
+      
+      <h3>Header Parameters (User-auth)</h3>
+      <p>
+        <span class="important">#x-email: email</span> (required)<br />
+        <span class="important">#x-password: password</span> (required)<br />
+      </p>
+      
+      <h3>Post Parameters</h3>
+      <p>
+        Posts are in this example made in json:<br />
+        Required fields are: typeName
+        <pre>        
+        {
+          "typeName" : string
+        }
+        </pre>
+      </p>
+      
+      <h3>Returns</h3>
+      <p>
+        <pre>
+        {
+            "response_code": 201,
+            "message": "A new resource-type has been created",
+            "link": URI
+        }
+        </pre>
+      </p>
+
+
+      <hr>
+      
+      <h2 id="putresourcetype">PUT Resource-type</h2>
+      <p>URI: /resource_types/:id</p>
+      
+      <h3>Description</h3>
+      <p>Update aresource-type</p>
+      
+      <h3>Query Parameters</h3>
+      <p>
+        <span class="important">#key: your api-key</span> (required)<br />
+      </p>
+      
+      <h3>Header Parameters (User-auth)</h3>
+      <p>
+        <span class="important">#x-email: email</span> (required)<br />
+        <span class="important">#x-password: password</span> (required)<br />
+      </p>
+      
+      <h3>Post Parameters</h3>
+      <p>
+        Posts are in this example made in json:<br />
+        Required fields are: typeName
+        <pre>        
+        {
+          "typeName" : string
+        }
+        </pre>
+      </p>
+      
+      <h3>Returns</h3>
+      <p>
+        <pre>
+        {
+            "response_code": 201,
+            "message": "Resource-type has been uppdated",
+            "link": URI
+        }
+        </pre>
+      </p>
+
+      <hr>
+      
+      <h2 id="deleteresourcetype">DELETE Resource-type</h2>
+      <p>URI: /resource_types/:id</p>
+      
+      <h3>Description</h3>
+      <p>Delete a resource-type</p>
+      
+      <h3>Query Parameters</h3>
+      <p>
+        <span class="important">#key: your api-key</span> (required)<br />
+      </p>
+      
+      <h3>Header Parameters (User-auth)</h3>
+      <p>
+        <span class="important">#x-email: email</span> (required)<br />
+        <span class="important">#x-password: password</span> (required)<br />
+      </p>
+
+      <h3>Returns</h3>
+      <p>
+        <pre>
+        {
+            "response_code": 200,
+            "message": "Resource-type deleted",
+            "link": ""
+        }
+        </pre>
+      </p>
+
+
+
+
+
+
+
+    <hr>
+      
+      <h2 id="searching">How to search in the API</h2>
+      <p>
+        Its important to be able to find what you are searching for. For example you might want to find all the resources that have a tag of interest? To do
+        this you simply have to know the tag.<br /><br />
+        
+        Example: /tags/:id<br />
+        <br />
+        Now you want to find all resources that has this tag.<br /><br />
+        Example: /tags/:id/resources<br /><br />
+        
+        The same goes for the most of the api. Often you will find "links" in the response, navigating you through the api.<br /> <br />
+        
+        You can also search for resources by using <span class="important">/search?search=searchword</span>
+      </p>
+      </div>
+  </body>
+</html>

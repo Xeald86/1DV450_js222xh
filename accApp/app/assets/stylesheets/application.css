@@ -33,15 +33,12 @@ html, body {
 
 #Header {
   height: 50px;
-  background: #f00;
+  background: #95d34b;
   text-align: center;
-  border-bottom: 1px solid #000;
-  -webkit-border-top-left-radius: 20px;
-  -webkit-border-top-right-radius: 20px;
-  -moz-border-radius-topleft: 20px;
-  -moz-border-radius-topright: 20px;
-  border-top-left-radius: 20px;
-  border-top-right-radius: 20px;
+  border: 1px solid #000;
+  -webkit-border-radius: 20px;
+  -moz-border-radius: 20px;
+  border-radius: 20px;
 }
 
 .title {

@@ -3,6 +3,11 @@ class Licence < ActiveRecord::Base
   
   has_many :resources
   
+  validates :licence_type,
+  :uniqueness => true,
+  :presence => { :message => "A licence-type is required" },
+  :length => { :minimum => 3, :message => "Your licence-type needs to be at least 3 chars long" }
+  
   def as_json(options={})
     super(options.merge(
       :except => [:created_at, :updated_at],

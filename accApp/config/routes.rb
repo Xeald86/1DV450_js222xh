@@ -4,7 +4,11 @@ AccApp::Application.routes.draw do
 
   # You can have the root of your site routed with "root"
   root 'applications#index'
-
+  
+  match "/404", :to => "errors#page_notFound", via: 'get'
+  match "/400", :to => "errors#bad_request", via: 'get'
+  match "/500", :to => "errors#server_error", via: 'get'
+  
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
 
@@ -14,11 +18,17 @@ AccApp::Application.routes.draw do
   # Example resource route (maps HTTP verbs to controller actions automatically):
   resources :applications
   
+  get 'admin' => 'admin#index', as: :admin
+  get 'removeApp' => 'admin#destroy', as: :adminDestroy
+  
   get 'apikeys' => 'apikeys#show', as: :apikey
   
   post 'login' => 'applications#login', as: :login
   get 'logout' => 'applications#logout', as: :logout
   get 'register' => 'applications#new', as: :register
+  get 'documentation' => 'applications#documentation', as: :documentation
+  
+  get 'search' => 'resources#search', as: :search
   
   resources :users do
     resources :resources

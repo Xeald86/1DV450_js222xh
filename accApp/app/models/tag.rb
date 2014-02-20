@@ -3,6 +3,11 @@ class Tag < ActiveRecord::Base
   
   has_and_belongs_to_many :resources
   
+  validates :tag,
+  :uniqueness => true,
+  :presence => { :message => "A tagname is required" },
+  :length => { :minimum => 2, :message => "Your tag needs to be at least 2 chars long" }
+  
   def as_json(options={})
     super(options.merge(
       :except => [:created_at, :updated_at],
