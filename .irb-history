@@ -1,0 +1,5 @@
+Resource.last
+Resource.last.tags
+Resource.find_by_id(2)
+Resource.find_by_id(2).tags
+Tag.all

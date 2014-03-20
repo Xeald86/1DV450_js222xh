@@ -1,4 +1,6 @@
 class ApplicationsController < ApplicationController
+  before_filter :set_access_control_headers
+  
   def show
   end
 

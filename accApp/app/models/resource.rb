@@ -14,6 +14,12 @@ class Resource < ActiveRecord::Base
   :presence => { :message => "A short description for the resource is required" },
   :length => { :minimum => 10, :message => "Your description needs to be at least 10 chars long" }
   
+  validates :resource_type,
+  :presence => { :message => "A resource-type for this resource is required" }
+  
+  validates :licence,
+  :presence => { :message => "A licence for this resource is required" }
+  
   validates :url,
   :presence => { :message => "A url for the resource is required" },
   :length => { :minimum => 10, :message => "Your url needs to be at least 10 chars long" }
@@ -23,18 +29,18 @@ class Resource < ActiveRecord::Base
   
   def as_json(options={})
     super(options.merge(
-      :except => [:updated_at, :licence_id, :tag_id, :user_id, :resource_type_id],
+      :except => [:updated_at, :tag_id, :user_id],
         #:include => [:tags, :resource_type, :licence, :user],
-        :include => [],
+      :include => [:tags, :licence, :resource_type],
         :methods => [:links]
       ))
   end
   
   def to_xml(options={})
     super(options.merge(
-      :except => [:updated_at, :licence_id, :tag_id, :user_id, :resource_type_id],
+      :except => [:updated_at, :tag_id, :user_id],
         #:include => [:tags, :resource_type, :licence, :user],
-        :include => [],
+        :include => [:tags],
         :methods => [:links]
       ))
   end

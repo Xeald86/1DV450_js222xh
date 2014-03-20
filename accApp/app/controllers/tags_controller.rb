@@ -1,6 +1,7 @@
 class TagsController < ApplicationController
   
-    before_action :default_format_json
+  before_filter :set_access_control_headers
+  before_action :default_format_json
   before_filter :restrict_access
   before_filter :user_authentication_required, :except => [:index, :show]
     #before_filter :user_authentication_required
@@ -10,28 +11,55 @@ class TagsController < ApplicationController
   def index
     if params[:resource_id]
       #/resources/_resource_id/tags/
-      @tags = Resource.find_by_id(params[:resource_id]).tags
+      message = "All tags for a resource"
+      tags = Resource.find_by_id(params[:resource_id]).tags
     else
       #/tags/
-      @tags = Tag.all
+      message = "All tags"
+      tags = Tag.all
     end
-    respond_with(@tags.limit(limit_param).offset(offset_param))
+    #respond_with(@tags.limit(limit_param).offset(offset_param))
+    
+    data = tags.limit(limit_param()).offset(offset_param).map do |tag|
+      format_data(tag)
+    end
+    
+    result = {
+      status: 200,
+      message: message,
+      count: tags.count,
+      offset: offset_param,
+      limit: limit_param,
+		  items: data
+    }
+    
+    respond_with result
   end
   
   def create
     t = Tag.new
     if params.has_key?(:tagName)
-      t.tag = params[:tagName]
+      t.tag = params[:tagName].capitalize
     end
+    
+    t_exist = Tag.find_by_tag(t.tag)
+    
+    if !t_exist.nil?
+      tagExist(t_exist)
+    else
       if t.valid?
-        if t.save
-          created_success(201, 201, "A new tag has been created", tags_path + "/" + t.id.to_s()) 
+        if t.save 
+          respond_to do |format|
+            format.json  {  render :json => {:response_code => 201, :message => "A new tag has been created", :tag => t, :link => tags_path + "/" + t.id.to_s()}, :status => 201 }
+            format.xml  {  render :xml => {:response_code => 201, :message => "A new tag has been created", :tag => t, :link => tags_path + "/" + t.id.to_s()}, :status => 201 }
+          end
         else
           server_error
         end
       else
         validation_error(t)
       end
+    end
   end
   
   def update
@@ -73,4 +101,14 @@ class TagsController < ApplicationController
     params.require(:tag).permit(:tag)
   end
 
+  def format_data(tag)
+		data = {
+        id: tag.id,
+        tag: tag.tag,
+        links: {
+          self: "/tags/"+tag.id.to_s(),
+          resources: "/tags/"+tag.id.to_s()+"/resources"
+        }
+		}
+	end
 end

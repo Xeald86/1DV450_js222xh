@@ -24,7 +24,7 @@ class User < ActiveRecord::Base
   
   def as_json(options={})
     super(options.merge(
-      :except => [:password_digest, :id, :last_name, :created_at, :updated_at],
+      :except => [:password_digest, :created_at, :updated_at],
         :include => [],
         :methods => [:links]
       ))
@@ -32,7 +32,7 @@ class User < ActiveRecord::Base
   
   def to_xml(options={})
     super(options.merge(
-        :except => [:password_digest, :id, :last_name, :created_at, :updated_at],
+        :except => [:password_digest, :created_at, :updated_at],
         :include => [],
         :methods => [:links]
       ))

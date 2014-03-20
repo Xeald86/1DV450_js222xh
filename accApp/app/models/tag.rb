@@ -6,7 +6,7 @@ class Tag < ActiveRecord::Base
   validates :tag,
   :uniqueness => true,
   :presence => { :message => "A tagname is required" },
-  :length => { :minimum => 2, :message => "Your tag needs to be at least 2 chars long" }
+  :length => { :minimum => 2, :maximum => 8, :message => "Your tag needs to be between 2 and 8 chars long" }
   
   def as_json(options={})
     super(options.merge(

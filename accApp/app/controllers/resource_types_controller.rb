@@ -1,5 +1,6 @@
 class ResourceTypesController < ApplicationController
   
+  before_filter :set_access_control_headers
   before_action :default_format_json
   before_filter :restrict_access
   before_filter :user_authentication_required, :except => [:index, :show]
@@ -8,8 +9,24 @@ class ResourceTypesController < ApplicationController
   
   def index
     #/resource_types/
-    @types = ResourceType.all
-    respond_with(@types.limit(limit_param).offset(offset_param))
+    types = ResourceType.all
+    #respond_with(@types.limit(limit_param).offset(offset_param))
+    
+    
+    data = types.limit(limit_param()).offset(offset_param).map do |type|
+      format_data(type)
+    end
+    
+    result = {
+      status: 200,
+      message: 'All resource-types',
+      count: types.count,
+      offset: offset_param,
+      limit: limit_param,
+		  items: data
+    }
+    
+    respond_with result
   end
   
   def create
@@ -64,4 +81,17 @@ class ResourceTypesController < ApplicationController
       no_content
     end
   end
+  
+  private
+  
+  def format_data(type)
+		data = {
+        id: type.id,
+        typeName: type.typeName,
+        links: {
+          self: "/resource_types/"+type.id.to_s(),
+          resources: "/resource_types/"+type.id.to_s()+"/resources"
+        }
+		}
+	end
 end

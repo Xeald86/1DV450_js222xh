@@ -15,6 +15,27 @@ class FillDatabseWithExampleData < ActiveRecord::Migration
       :password => "jonas123",
       :password_confirmation => "jonas123"
       )
+    User.create(
+      :first_name => "Jimmy", 
+      :last_name => "Wester",
+      :email => "wester.jimmy@gmail.com",
+      :password => "abc123",
+      :password_confirmation => "abc123"
+      )
+    User.create(
+      :first_name => "Tom", 
+      :last_name => "Masson",
+      :email => "mark@gmail.com",
+      :password => "abc123",
+      :password_confirmation => "abc123"
+      )
+    User.create(
+      :first_name => "Tommy", 
+      :last_name => "Pettersson",
+      :email => "tommy@gmail.com",
+      :password => "abc123",
+      :password_confirmation => "abc123"
+      )
     
     
     #LICENCE DATA ----------------------------

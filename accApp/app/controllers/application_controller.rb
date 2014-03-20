@@ -6,6 +6,13 @@ class ApplicationController < ActionController::Base
     
 private
   
+  def set_access_control_headers 
+    headers['Access-Control-Allow-Origin'] = '*' 
+    headers['Access-Control-Allow-Methods'] = 'POST, PUT, DELETE, GET, OPTIONS'
+    headers['Access-Control-Request-Method'] = '*' 
+    headers['Access-Control-Allow-Headers'] = 'Origin, X-Requested-With, Content-Type, Accept, Authorization, x-email, x-password'
+  end
+  
   def default_format_json
     if(
         (request.headers["HTTP_ACCEPT"].nil? && params[:format].nil?) ||
@@ -17,7 +24,7 @@ private
   
   def limit_param
     if(params[:limit].nil?)
-      100
+      25
     else
       params[:limit]
     end
@@ -81,6 +88,13 @@ private
     respond_to do |format|
       format.json { render :json => { :response_code => 422, :message => "Some errors where found that needs to be corrected", :errors => u.errors.messages }, :status => 422 }
       format.xml { render :xml => { :response_code => 422, :message => "Some errors where found that needs to be corrected", :errors => u.errors.messages }, :status => 422 }
+    end
+  end
+    
+  def tagExist(t)
+    respond_to do |format| 
+      format.json { render :json => { :response_code => 409, :message => "This tag already exist", :tag => t }, :status => 409 }
+      format.xml { render :xml => { :response_code => 409, :message => "This tag already exist", :tag => t }, :status => 422 }
     end
   end
     

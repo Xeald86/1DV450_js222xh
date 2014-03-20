@@ -1,5 +1,6 @@
 class LicencesController < ApplicationController
-  
+
+  before_filter :set_access_control_headers
   before_action :default_format_json
   before_filter :restrict_access
   before_filter :user_authentication_required, :except => [:index, :show]
@@ -8,8 +9,22 @@ class LicencesController < ApplicationController
   
   def index
     #/licences/
-    @licences = Licence.all
-    respond_with(@licences.limit(limit_param).offset(offset_param))
+    licences = Licence.all
+    
+    data = licences.limit(limit_param()).offset(offset_param).map do |licence|
+      format_data(licence)
+    end
+    
+    result = {
+      status: 200,
+      message: 'All licences',
+      count: licences.count,
+      offset: offset_param,
+      limit: limit_param,
+		  items: data
+    }
+    
+    respond_with result
   end
   
   def create
@@ -64,4 +79,18 @@ class LicencesController < ApplicationController
       no_content
     end
   end
+  
+  private
+  
+  def format_data(licence)
+		data = {
+        id: licence.id,
+        licence_type: licence.licence_type,
+        links: {
+          self: "/licences/"+licence.id.to_s(),
+          resources: "/licences/"+licence.id.to_s()+"/resources"
+        }
+		}
+	end
+  
 end

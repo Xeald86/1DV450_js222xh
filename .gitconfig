@@ -8,3 +8,6 @@
   llog = log --date=local
 [rerere]
   enabled = true
+[user]
+	name = Jimmy Sigeklint
+	email = js222xh@student.lnu.se

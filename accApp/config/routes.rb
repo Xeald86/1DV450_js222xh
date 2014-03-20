@@ -25,6 +25,9 @@ AccApp::Application.routes.draw do
   
   post 'login' => 'applications#login', as: :login
   get 'logout' => 'applications#logout', as: :logout
+  
+  post '/userAuth' => 'users#userAuth', as: :userAuth
+  
   get 'register' => 'applications#new', as: :register
   get 'documentation' => 'applications#documentation', as: :documentation
   
@@ -41,6 +44,8 @@ AccApp::Application.routes.draw do
   resources :licences do
     resources :resources
   end
+  
+  match '(*foo)' => "applications#index", via: :options
   
   resources :tags do
     resources :resources
