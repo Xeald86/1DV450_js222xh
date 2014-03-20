@@ -3,8 +3,8 @@
 
 Här kommer instruktioner om hur du går till väga för att installera API och webapplikationen.
 
-###API
-==============
+####API
+-----------
 1. root-katalogen är: accApp. Bortse från alla andra filer.
 2. Gå till /documentation för att få instruktioner för resten av processen.
 
