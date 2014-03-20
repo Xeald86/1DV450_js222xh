@@ -1,0 +1,8 @@
+<div id="content">
+	<div>
+		<h2>Resources for {{ selected.licence_type }}</h2>
+		<p ng-repeat="resource in resources track by $index">
+			<resource-show resource="resource"></resource-show>
+		</p>
+	</div>
+</div>

@@ -1,4 +1,4 @@
-#TOERH API/WebClient
+﻿#TOERH API/WebClient
 
 
 Här kommer instruktioner om hur du går till väga för att installera API och webapplikationen.
@@ -22,6 +22,8 @@ Här kommer instruktioner om hur du går till väga för att installera API och 
 3. API-nyckel läggs i /app.js, rad 54
 
 4. Address till APIt läggs i /app.j, rad 53 (PS. var försiktig med vad du tar bort på raden)
+
+Att tänka på: Inloggning av en användare varar endast så länge som den aktiva SPA-sessionen körs. Detta innebär att du loggas ut så fort du lämna applikationen eller gör en uppdatering av applikationen.
 
 Fungerande inloggning [anv: Jabob@test.com, pass: jacob123]
 

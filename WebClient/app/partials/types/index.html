@@ -1,0 +1,9 @@
+<div id="content">
+	<div>
+		<h2>Sort resources by type</h2>
+		<p>Select the type you want to see resources for.</p>
+		<div ng-repeat="type in types track by $index">
+			<a href="#/types/{{ type.id }}">{{ type.typeName }}</a>
+		</div>
+	</div>
+</div>

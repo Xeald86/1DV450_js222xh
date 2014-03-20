@@ -1,0 +1,9 @@
+<div id="content" data-ng-controller="homeController">
+	<h2>Welcome home to TOERH</h2>
+	<p ng-show="!authenticated">
+		You are at the moment not signed in as a user of TOERH. To be able to add, edit and delete resources you will have to <a href="#/login">sign in</a>.
+	</p>
+	<p ng-show="authenticated">
+		You are signed in and have access to all of TOEH's funktions. You do not need to log off, this will be done when leaving the application.
+	</p>
+</div>

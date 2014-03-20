@@ -1,0 +1,58 @@
+<div id="content">
+	<div ng-show="selected != null">
+		<p>
+			<form name="resourceForm" ng-submit="updateResource(resourceForm.$valid)" ng-controller="resourceFormController" novalidate>
+			
+			<div class="form-group" ng-class="{ 'has-error' : resourceForm.name.$invalid && !resourceForm.name.$pristine }">
+				<label>Name: <span class="errorSpan">{{ APIResponse.errors.name[0] }}</span></label>
+				<input type="text" name="name" class="form-control" ng-minlength=5 ng-maxlength=100 required ng-model="selected.name" />
+				<p ng-show="resourceForm.name.$error.minlength" class="help-block">Name is too short.</p>
+				<p ng-show="resourceForm.name.$error.maxlength" class="help-block">Name is too long.</p>
+			</div>
+			
+			<div class="form-group" ng-class="{ 'has-error' : resourceForm.url.$invalid && !resourceForm.url.$pristine }">
+				<label>Url: <span class="errorSpan">{{ APIResponse.errors.url[0] }}</span></label>
+				<input type="url" name="url" class="form-control" ng-minlength=10 ng-maxlength=100 required ng-model="selected.url" />
+				<p ng-show="resourceForm.url.$invalid && !resourceForm.url.$pristine" class="help-block">A valid url is required.</p>
+			</div>
+				
+			<div class="form-group" ng-class="{ 'has-error' : resourceForm.description.$invalid && !resourceForm.description.$pristine }">
+				<label>Description: <span class="errorSpan">{{ APIResponse.errors.description[0] }}</span></label>
+				<textarea class="form-control" name="description" ng-minlength=10 ng-maxlength=200 required ng-model="selected.description"></textarea>
+				<p ng-show="resourceForm.description.$error.minlength" class="help-block">Description is too short.</p>
+				<p ng-show="resourceForm.description.$error.maxlength" class="help-block">Description is too long.</p>
+			</div>
+			
+			<div class="form-group" ng-class="{ 'has-error' : resourceForm.licence.$invalid}">
+				<label>Licence: <span class="errorSpan">{{ APIResponse.errors.licence[0] }}</span></label>
+				<label ng-repeat="licence in APIContent.licences.items">
+					<input type="radio" name="licence" required ng-model="selected.licence_id" ng-value="licence.id" />{{licence.licence_type}}
+				</label>
+				<p ng-show="resourceForm.licence.$invalid" class="help-block">Pick a licence.</p>
+			</div>
+			
+			<div class="form-group" ng-class="{ 'has-error' : resourceForm.type.$invalid}">
+				<label>Resource-type: <span class="errorSpan">{{ APIResponse.errors.resource_type[0] }}</span></label>
+				<label ng-repeat="type in APIContent.resourceTypes.items">
+					<input type="radio" name="type" required ng-model="selected.resource_type_id" ng-value="type.id" />{{type.typeName}}
+				</label>
+				<p ng-show="resourceForm.type.$invalid" class="help-block">Pick a resource-type.</p>
+			</div>
+			
+			
+			<div class="form-group">
+				<label ng-show="selected.tags.length >= 1">Tags:</label>
+				<span ng-repeat="tag in selected.tags">
+					{{tag.tag}} | remove<br />
+				</span>
+				<br />
+				<label>Add tag</label>
+				<input type="text" ng-model="newTag" class="form-control" style="width: 100px; float: left;" /><input type="button" class="btn btn-sm btn-default" value="Add tag" ng-click="addTag()" />
+				<span class="errorSpan">{{ APIResponse.errors.tag[0] }}</span>
+			</div>
+				
+			<input type="submit" class="btn btn-primary" value="Update resource" ng-disabled="resourceForm.$invalid" />
+			</form>
+		</p>
+	</div>
+</div>

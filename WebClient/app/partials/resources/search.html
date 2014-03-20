@@ -1,0 +1,18 @@
+<div id="content">
+	<h2>Resources for "{{searchword}}"</h2>
+	<div>
+		<p>
+			<button class="btn btn-xs btn-default" ng-disabled="page == 1" ng-click="getResources(page - 1)">Previous</button>
+			{{page}}/{{totalPages}}
+			<button class="btn btn-xs btn-default" ng-disabled="page >= totalPages" ng-click="getResources(page + 1)">Next</button>
+		</p>
+		<hr>
+		<div ng-show="resources.length <= 0">
+			We could not find any matching resources...
+		</div>
+		<p ng-repeat="resource in resources track by $index">
+			<a href="#/resources/show/{{ resource.id }}">{{ resource.name }}</a><br />
+			<small>{{ resource.description | preview: 40 }}</small>
+		</p>
+	</div>
+</div>

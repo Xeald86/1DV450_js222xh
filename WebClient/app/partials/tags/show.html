@@ -1,0 +1,21 @@
+<div id="content">
+	<div>
+		<h2>Resources tagged with "{{ selected.tag }}"</h2>
+		<div ng-show="resources.length >= 1">
+		
+			<p>
+				<button class="btn btn-xs btn-default" ng-disabled="page == 1" ng-click="getResources(page - 1)">Previous</button>
+				{{page}}/{{totalPages}}
+				<button class="btn btn-xs btn-default" ng-disabled="page >= totalPages" ng-click="getResources(page + 1)">Next</button>
+			</p>
+			<hr>
+		
+			<p ng-repeat="resource in resources track by $index">
+				<resource-show resource="resource"></resource-show>
+			</p>
+		</div>
+		<div ng-show="resources.length <= 0">
+			There are no resources that are tagged with "{{ selected.tag }}"
+		</div>
+	</div>
+</div>

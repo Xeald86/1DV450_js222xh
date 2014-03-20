@@ -1,0 +1,10 @@
+<div id="content">
+	<div>
+		<h2>Sort resources by user</h2>
+		<p>Select the user you want to see resources for.</p>
+		<div ng-repeat="user in users track by $index">
+			<a href="#/users/{{ user.id }}">{{ user.first_name }} {{ user.last_name }}</a><br />
+			<small>{{ resource.description | preview: 40 }}</small>
+		</div>
+	</div>
+</div>

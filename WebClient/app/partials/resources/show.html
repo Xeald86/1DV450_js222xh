@@ -1,0 +1,34 @@
+<div id="content">
+	<h2>{{ selected.name }}</h2>
+	<div>
+			<p>
+				<strong>Url:</strong><br />
+				<a href="{{ selected.url }}">{{ selected.url }}</a>
+			</p>
+			
+			<p>
+				<strong>Description:</strong><br />
+				{{ selected.description }}
+			</p>
+			
+			<p>
+				<strong>Licence:</strong><br />
+				{{ selected.licence.licence_type }}
+			</p>
+			
+			<p>
+				<strong>Resource-type:</strong><br />
+				{{ selected.resource_type.typeName }}
+			</p>
+			
+			
+			<p ng-show="selected.tags.length >= 1">
+				<strong>Tagged as:</strong><br />
+				<span ng-repeat="tag in selected.tags">[{{ tag.tag }}]</span>
+			</p>
+			
+			<div ng-show="authed">
+				<a class="btn btn-primary" href="#/resources/edit/{{selected.id}}">Edit</a> <span class="btn btn-danger" ng-click="deleteResource(selected.id)">Remove</span>
+			</div>
+	</div>
+</div>

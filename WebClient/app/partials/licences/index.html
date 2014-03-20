@@ -1,0 +1,9 @@
+<div id="content">
+	<div>
+		<h2>Sort resources by licence</h2>
+		<p>Select the licence you want to see resources for.</p>
+		<div ng-repeat="licence in licences track by $index">
+			<a href="#/licences/{{ licence.id }}">{{ licence.licence_type }}</a>
+		</div>
+	</div>
+</div>
