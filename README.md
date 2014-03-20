@@ -17,6 +17,10 @@ Här kommer instruktioner om hur du går till väga för att installera API och 
 
 2. Kopiera mappen till din root och kör sedan index.html
 
+3. API-nyckel läggs i /app.js, rad 54
+
+4. Address till APIt läggs i /app.j, rad 53 (PS. var försiktig med vad du tar bort på raden)
+
 Fungerande inloggning [anv: Jabob@test.com, pass: jacob123]
 
 
