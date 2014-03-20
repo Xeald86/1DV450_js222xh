@@ -45,6 +45,6 @@ Viktigaste ändringar som gjorts kring APIt är:
 
 
 
-###Problem med instalaltion?
+###Problem med installation?
 -----------
 Jag kan kontaktas på js222xh@student.lnu.se
