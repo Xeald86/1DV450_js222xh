@@ -116,9 +116,13 @@ class ResourcesController < ApplicationController
   def destroy
     if Resource.find_by(id: params[:id])
       res = Resource.find_by(id: params[:id])
-      res.tags.destroy_all
-      res.destroy
-      created_success(200, 200, "Resource deleted", "")
+      if userIsCreator(res.user.id)
+        res.tags.destroy_all
+        res.destroy
+        created_success(200, 200, "Resource deleted", "")
+      else
+        error(403, 403, "Restricted access");
+      end
     else
       no_content
     end
@@ -126,26 +130,29 @@ class ResourcesController < ApplicationController
   
   def update
     res = Resource.find_by(id: params[:id])
-    
-    #Destroy all existing tags
-    res.tags.destroy_all
-    
-    #Add tags that are given
-    if params.has_key?(:tags)
-      if !params[:tags].nil?
-        params[:tags].each do |t|
-          tag = Tag.find_by_id(t["id"])
-          unless res.tags.include? tag
-            res.tags << tag
+    if userIsCreator(res.user.id)
+      #Destroy all existing tags
+      res.tags.destroy_all
+      
+      #Add tags that are given
+      if params.has_key?(:tags)
+        if !params[:tags].nil?
+          params[:tags].each do |t|
+            tag = Tag.find_by_id(t["id"])
+            unless res.tags.include? tag
+              res.tags << tag
+            end
           end
         end
       end
-    end
-    
-    if Resource.update(params[:id], resource_params)
-      created_success(201, 201, "Resource has been updated", resources_path + "/" + res.id.to_s())
+      
+      if Resource.update(params[:id], resource_params)
+        created_success(201, 201, "Resource has been updated", resources_path + "/" + res.id.to_s())
+      else
+        server_error
+      end
     else
-      server_error
+      error(403, 403, "Restricted access");
     end
   end
   
@@ -189,5 +196,13 @@ class ResourcesController < ApplicationController
 
 	end
 
+  def userIsCreator(userID)
+    user = User.find_by_email(request.headers['x-email'])
+    if user.id == userID
+      return true
+    else
+      return false
+    end
+  end
 
 end

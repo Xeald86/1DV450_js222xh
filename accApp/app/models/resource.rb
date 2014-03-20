@@ -29,7 +29,7 @@ class Resource < ActiveRecord::Base
   
   def as_json(options={})
     super(options.merge(
-      :except => [:updated_at, :tag_id, :user_id],
+      :except => [:updated_at, :tag_id],
         #:include => [:tags, :resource_type, :licence, :user],
       :include => [:tags, :licence, :resource_type],
         :methods => [:links]
@@ -38,9 +38,9 @@ class Resource < ActiveRecord::Base
   
   def to_xml(options={})
     super(options.merge(
-      :except => [:updated_at, :tag_id, :user_id],
+      :except => [:updated_at, :tag_id],
         #:include => [:tags, :resource_type, :licence, :user],
-        :include => [:tags],
+      :include => [:tags, :licence, :resource_type],
         :methods => [:links]
       ))
   end
