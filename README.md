@@ -7,7 +7,9 @@ Här kommer instruktioner om hur du går till väga för att installera API och 
 -----------
 1. root-katalogen är: accApp. Bortse från alla andra filer.
 
-2. Gå till /documentation för att få instruktioner för resten av processen.
+2. Installera gem "bcrypt-ruby"
+
+3. Gå till /documentation för att få instruktioner för resten av processen.
 
 
 
@@ -37,3 +39,12 @@ Viktigaste ändringar som gjorts kring APIt är:
 3. En användare kan endast radera och uppdatera sina egna resurser och inte andras.
 
 4. En "get" på /resources skickar nu med count, offset och limit så att pagination är möjligt på webklienten
+
+5. Det finns en risk att dokumentationen inte stämmer på vissa ställen. Detta bör dock BARA vara i form av hur svaren ser ut på lyckade anrop. jag har försökt att uppdatera dokumentationen så gått jag kunnat för att inga problem ska uppstå.
+
+
+
+
+###Problem med instalaltion?
+-----------
+Jag kan kontaktas på js222xh@student.lnu.se
